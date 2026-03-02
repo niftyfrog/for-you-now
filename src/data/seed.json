@@ -1,0 +1,983 @@
+{
+  "spots": [
+    {
+      "id": "scenery-001",
+      "name": "福岡タワー",
+      "category": "scenery",
+      "subcategory": "展望台",
+      "lat": 33.5934,
+      "lng": 130.3515,
+      "address": "福岡県福岡市早良区百道浜2-3-26",
+      "openHours": {
+        "open": "09:30",
+        "close": "22:00"
+      },
+      "budgetRange": "800円",
+      "tags": [
+        "夜景",
+        "展望台",
+        "屋内",
+        "雨OK",
+        "デート"
+      ],
+      "indoorOutdoor": "indoor",
+      "sourceUrl": "https://www.fukuokatower.co.jp/",
+      "travelTime": {
+        "walk": 25,
+        "transit": 10
+      },
+      "reasonTemplates": {
+        "sunset": "博多湾に沈む夕日、今がピーク。",
+        "night": "福岡の夜景を234mから。",
+        "rain": "雨の日でも展望は楽しめる。",
+        "default": "福岡を一望できる場所。"
+      },
+      "inviteTemplates": {
+        "short": "展望台だけサクッと？",
+        "medium": "夕日が沈むの見届けない？",
+        "default": "上から福岡、見てみる？"
+      }
+    },
+    {
+      "id": "scenery-002",
+      "name": "大濠公園",
+      "category": "scenery",
+      "subcategory": "公園",
+      "lat": 33.5868,
+      "lng": 130.3789,
+      "address": "福岡県福岡市中央区大濠公園1",
+      "openHours": {
+        "open": "00:00",
+        "close": "23:59"
+      },
+      "budgetRange": "無料",
+      "tags": [
+        "公園",
+        "池",
+        "散歩",
+        "夕焼け",
+        "ランニング"
+      ],
+      "indoorOutdoor": "outdoor",
+      "sourceUrl": "https://www.ohorikouen.jp/",
+      "travelTime": {
+        "walk": 15,
+        "transit": 5
+      },
+      "reasonTemplates": {
+        "sunset": "池に映る夕焼けが最高。",
+        "night": "ライトアップされた池が幻想的。",
+        "rain": "雨上がりの大濠は空気が澄む。",
+        "default": "都心のオアシスをぐるっと一周。"
+      },
+      "inviteTemplates": {
+        "short": "池のまわり、5分だけ歩く？",
+        "medium": "一周2kmの散歩コースどう？",
+        "default": "大濠でボーっとしない？"
+      }
+    },
+    {
+      "id": "scenery-003",
+      "name": "志賀島（金印公園）",
+      "category": "scenery",
+      "subcategory": "海",
+      "lat": 33.6621,
+      "lng": 130.3549,
+      "address": "福岡県福岡市東区志賀島",
+      "openHours": {
+        "open": "00:00",
+        "close": "23:59"
+      },
+      "budgetRange": "無料",
+      "tags": [
+        "海",
+        "歴史",
+        "ドライブ",
+        "夕焼け"
+      ],
+      "indoorOutdoor": "outdoor",
+      "sourceUrl": "https://yokanavi.com/spot/26902/",
+      "travelTime": {
+        "walk": 90,
+        "transit": 30
+      },
+      "reasonTemplates": {
+        "sunset": "海に沈む夕日、ここが特等席。",
+        "night": "星がきれいに見える夜。",
+        "rain": "天気が良い日にまた来よう。",
+        "default": "金印が見つかった歴史の島。"
+      },
+      "inviteTemplates": {
+        "short": "展望台だけ見て帰る？",
+        "medium": "海沿いドライブしない？",
+        "default": "島まで足を伸ばしてみる？"
+      }
+    },
+    {
+      "id": "scenery-004",
+      "name": "シーサイドももち海浜公園",
+      "category": "scenery",
+      "subcategory": "海",
+      "lat": 33.5920,
+      "lng": 130.3465,
+      "address": "福岡県福岡市早良区百道浜2丁目",
+      "openHours": {
+        "open": "00:00",
+        "close": "23:59"
+      },
+      "budgetRange": "無料",
+      "tags": [
+        "海",
+        "ビーチ",
+        "夕焼け",
+        "散歩",
+        "無料"
+      ],
+      "indoorOutdoor": "outdoor",
+      "sourceUrl": "https://yokanavi.com/spot/26417/",
+      "travelTime": {
+        "walk": 20,
+        "transit": 8
+      },
+      "reasonTemplates": {
+        "sunset": "ももちの夕焼け、今が見頃。",
+        "night": "夜のビーチ沿い、意外と穴場。",
+        "rain": "晴れの日にまた来よう。",
+        "default": "ヤフオクドーム横のビーチ散歩。"
+      },
+      "inviteTemplates": {
+        "short": "砂浜だけ少し歩く？",
+        "medium": "海を見ながらぼーっとする？",
+        "default": "海風に当たりに行かない？"
+      }
+    },
+    {
+      "id": "scenery-005",
+      "name": "南公園・動植物園展望台",
+      "category": "scenery",
+      "subcategory": "展望",
+      "lat": 33.5715,
+      "lng": 130.3917,
+      "address": "福岡県福岡市中央区南公園",
+      "openHours": {
+        "open": "09:00",
+        "close": "17:00"
+      },
+      "budgetRange": "600円",
+      "tags": [
+        "展望",
+        "緑",
+        "動物園",
+        "散歩"
+      ],
+      "indoorOutdoor": "outdoor",
+      "sourceUrl": "https://zoo.city.fukuoka.lg.jp/",
+      "travelTime": {
+        "walk": 30,
+        "transit": 12
+      },
+      "reasonTemplates": {
+        "sunset": "高台から市街の夕焼け。",
+        "night": "閉園前のゴールデンタイム。",
+        "rain": "温室もあるから雨でも楽しい。",
+        "default": "福岡市を見下ろす高台の緑。"
+      },
+      "inviteTemplates": {
+        "short": "展望スポットだけ見る？",
+        "medium": "動物も少し見ていく？",
+        "default": "高台の空気を吸いに行こう。"
+      }
+    },
+    {
+      "id": "scenery-006",
+      "name": "愛宕神社",
+      "category": "scenery",
+      "subcategory": "神社",
+      "lat": 33.5873,
+      "lng": 130.3575,
+      "address": "福岡県福岡市西区愛宕2-7-1",
+      "openHours": {
+        "open": "06:00",
+        "close": "18:00"
+      },
+      "budgetRange": "無料",
+      "tags": [
+        "神社",
+        "展望",
+        "夕焼け",
+        "パワースポット",
+        "無料"
+      ],
+      "indoorOutdoor": "outdoor",
+      "sourceUrl": "https://atagojinja.com/",
+      "travelTime": {
+        "walk": 20,
+        "transit": 8
+      },
+      "reasonTemplates": {
+        "sunset": "博多湾に沈む夕日の特等席。",
+        "night": "閉門前の静かな境内。",
+        "rain": "雨の神社、人が少なくて静か。",
+        "default": "福岡最古の神社からの絶景。"
+      },
+      "inviteTemplates": {
+        "short": "展望台だけ見て戻る？",
+        "medium": "参拝してから景色も見る？",
+        "default": "絶景パワースポット、行く？"
+      }
+    },
+    {
+      "id": "scenery-007",
+      "name": "能古島展望台",
+      "category": "scenery",
+      "subcategory": "島",
+      "lat": 33.6156,
+      "lng": 130.3430,
+      "address": "福岡県福岡市西区能古島",
+      "openHours": {
+        "open": "00:00",
+        "close": "23:59"
+      },
+      "budgetRange": "往復460円（船）",
+      "tags": [
+        "島",
+        "花",
+        "展望",
+        "自然"
+      ],
+      "indoorOutdoor": "outdoor",
+      "sourceUrl": "https://nokonoshima.com/",
+      "travelTime": {
+        "walk": 60,
+        "transit": 25
+      },
+      "reasonTemplates": {
+        "sunset": "島から眺める夕日は格別。",
+        "night": "最終便に間に合うなら今。",
+        "rain": "晴れの日にリベンジしよう。",
+        "default": "フェリー10分で別世界。"
+      },
+      "inviteTemplates": {
+        "short": "フェリーで渡るだけでも？",
+        "medium": "島を一周してみる？",
+        "default": "プチ離島旅、どう？"
+      }
+    },
+    {
+      "id": "food-001",
+      "name": "一蘭 本社総本店",
+      "category": "food",
+      "subcategory": "ラーメン",
+      "lat": 33.5858,
+      "lng": 130.4088,
+      "address": "福岡県福岡市博多区中洲5-3-2",
+      "openHours": {
+        "open": "10:00",
+        "close": "28:00"
+      },
+      "budgetRange": "900〜1500円",
+      "tags": [
+        "ラーメン",
+        "とんこつ",
+        "深夜",
+        "一人OK",
+        "本店"
+      ],
+      "indoorOutdoor": "indoor",
+      "sourceUrl": "https://ichiran.com/",
+      "travelTime": {
+        "walk": 10,
+        "transit": 3
+      },
+      "mealType": [
+        "lunch",
+        "dinner"
+      ],
+      "reasonTemplates": {
+        "lunch": "昼の一蘭、並ばず入れるかも。",
+        "dinner": "深夜4時まで。締めのラーメンに。",
+        "cafe": "間食にラーメンという贅沢。",
+        "default": "一蘭の、ここが本社総本店。"
+      },
+      "inviteTemplates": {
+        "short": "サクッと一杯だけ。",
+        "medium": "替え玉までいく？",
+        "default": "本店の味、食べてみない？"
+      }
+    },
+    {
+      "id": "food-002",
+      "name": "博多 一双",
+      "category": "food",
+      "subcategory": "ラーメン",
+      "lat": 33.5903,
+      "lng": 130.4178,
+      "address": "福岡県福岡市博多区博多駅東3-1-6",
+      "openHours": {
+        "open": "11:00",
+        "close": "24:00"
+      },
+      "budgetRange": "800〜1200円",
+      "tags": [
+        "ラーメン",
+        "とんこつ",
+        "泡系",
+        "行列"
+      ],
+      "indoorOutdoor": "indoor",
+      "sourceUrl": "https://www.hakata-issou.com/",
+      "travelTime": {
+        "walk": 12,
+        "transit": 4
+      },
+      "mealType": [
+        "lunch",
+        "dinner"
+      ],
+      "reasonTemplates": {
+        "lunch": "泡系とんこつの元祖、ランチに。",
+        "dinner": "夜は行列が減るタイミング。",
+        "cafe": "間食ラーメン、背徳感がいい。",
+        "default": "「カプチーノ泡系」の先駆者。"
+      },
+      "inviteTemplates": {
+        "short": "ラーメン、15分で食べれる。",
+        "medium": "泡系とんこつ、体験してみない？",
+        "default": "博多に来たならこれ。"
+      }
+    },
+    {
+      "id": "food-003",
+      "name": "博多うどん はし田",
+      "category": "food",
+      "subcategory": "うどん",
+      "lat": 33.5893,
+      "lng": 130.4058,
+      "address": "福岡県福岡市博多区上川端町4-234",
+      "openHours": {
+        "open": "11:00",
+        "close": "21:00"
+      },
+      "budgetRange": "500〜900円",
+      "tags": [
+        "うどん",
+        "博多",
+        "ランチ",
+        "やわ麺"
+      ],
+      "indoorOutdoor": "indoor",
+      "sourceUrl": "https://yokanavi.com/gourmet/",
+      "travelTime": {
+        "walk": 8,
+        "transit": 3
+      },
+      "mealType": [
+        "lunch",
+        "dinner"
+      ],
+      "reasonTemplates": {
+        "lunch": "博多のやわ麺うどん、ランチに◎。",
+        "dinner": "さっぱり食べたい夜に。",
+        "cafe": "うどんで軽く済ませる。",
+        "default": "博多はラーメンだけじゃない。"
+      },
+      "inviteTemplates": {
+        "short": "ワンコインでサクッと。",
+        "medium": "ごぼう天うどん、いかない？",
+        "default": "博多うどん、一回食べてみて。"
+      }
+    },
+    {
+      "id": "food-004",
+      "name": "屋台 中洲屋台街",
+      "category": "food",
+      "subcategory": "屋台",
+      "lat": 33.5905,
+      "lng": 130.4053,
+      "address": "福岡県福岡市博多区中洲 那珂川沿い",
+      "openHours": {
+        "open": "18:00",
+        "close": "26:00"
+      },
+      "budgetRange": "1000〜3000円",
+      "tags": [
+        "屋台",
+        "ディナー",
+        "ラーメン",
+        "おでん",
+        "深夜",
+        "博多名物"
+      ],
+      "indoorOutdoor": "outdoor",
+      "sourceUrl": "https://yokanavi.com/yatai/",
+      "travelTime": {
+        "walk": 8,
+        "transit": 3
+      },
+      "mealType": [
+        "dinner"
+      ],
+      "reasonTemplates": {
+        "lunch": "屋台は夕方からオープン。",
+        "dinner": "今がちょうど屋台タイム。",
+        "cafe": "夕方の準備中を覗きに？",
+        "default": "博多の夜は屋台から始まる。"
+      },
+      "inviteTemplates": {
+        "short": "一軒だけ覗いてみる？",
+        "medium": "屋台はしご、する？",
+        "default": "川沿いの屋台、雰囲気最高。"
+      }
+    },
+    {
+      "id": "food-005",
+      "name": "むつか堂カフェ",
+      "category": "food",
+      "subcategory": "カフェ",
+      "lat": 33.5849,
+      "lng": 130.3983,
+      "address": "福岡県福岡市中央区警固2-4-20",
+      "openHours": {
+        "open": "08:00",
+        "close": "18:00"
+      },
+      "budgetRange": "600〜1200円",
+      "tags": [
+        "カフェ",
+        "パン",
+        "トースト",
+        "おしゃれ"
+      ],
+      "indoorOutdoor": "indoor",
+      "sourceUrl": "https://mutsukado.jp/",
+      "travelTime": {
+        "walk": 10,
+        "transit": 4
+      },
+      "mealType": [
+        "cafe",
+        "lunch"
+      ],
+      "reasonTemplates": {
+        "lunch": "角食パンのランチ、絶品。",
+        "dinner": "閉店前に滑り込み。",
+        "cafe": "福岡で一番美味しいトースト。",
+        "default": "食パン専門店のカフェ。"
+      },
+      "inviteTemplates": {
+        "short": "トーストだけサクッと？",
+        "medium": "ゆっくりカフェする？",
+        "default": "このトースト、感動するよ。"
+      }
+    },
+    {
+      "id": "food-006",
+      "name": "天ぷら ひらお 本店",
+      "category": "food",
+      "subcategory": "天ぷら",
+      "lat": 33.5627,
+      "lng": 130.4264,
+      "address": "福岡県福岡市南区大楠3-26-7",
+      "openHours": {
+        "open": "10:30",
+        "close": "21:00"
+      },
+      "budgetRange": "700〜1200円",
+      "tags": [
+        "天ぷら",
+        "ランチ",
+        "定食",
+        "行列",
+        "コスパ"
+      ],
+      "indoorOutdoor": "indoor",
+      "sourceUrl": "https://tempura-hirao.com/",
+      "travelTime": {
+        "walk": 25,
+        "transit": 10
+      },
+      "mealType": [
+        "lunch",
+        "dinner"
+      ],
+      "reasonTemplates": {
+        "lunch": "揚げたて天ぷら定食、ランチに最高。",
+        "dinner": "夜の天ぷら、ご飯おかわり無料。",
+        "cafe": "間食に天ぷらという選択。",
+        "default": "福岡県民が愛する天ぷら。"
+      },
+      "inviteTemplates": {
+        "short": "並ぶなら今。",
+        "medium": "揚げたてを食べに行こう。",
+        "default": "ひらおの天ぷら、食べたことある？"
+      }
+    },
+    {
+      "id": "food-007",
+      "name": "マンガミュージアムカフェ COMMA COFFEE",
+      "category": "food",
+      "subcategory": "カフェ",
+      "lat": 33.5910,
+      "lng": 130.4015,
+      "address": "福岡県福岡市中央区天神2-2-43",
+      "openHours": {
+        "open": "10:00",
+        "close": "21:00"
+      },
+      "budgetRange": "500〜1000円",
+      "tags": [
+        "カフェ",
+        "マンガ",
+        "天神",
+        "のんびり"
+      ],
+      "indoorOutdoor": "indoor",
+      "sourceUrl": "https://yokanavi.com/",
+      "travelTime": {
+        "walk": 5,
+        "transit": 2
+      },
+      "mealType": [
+        "cafe"
+      ],
+      "reasonTemplates": {
+        "lunch": "ランチ後のコーヒー。",
+        "dinner": "夕方のカフェタイム。",
+        "cafe": "マンガ読みながらコーヒー。",
+        "default": "天神でまったりカフェ。"
+      },
+      "inviteTemplates": {
+        "short": "コーヒーだけ飲む？",
+        "medium": "マンガ読みながら休む？",
+        "default": "ちょっと座ろう。"
+      }
+    },
+    {
+      "id": "rest-001",
+      "name": "万葉の湯 博多",
+      "category": "rest",
+      "subcategory": "温泉",
+      "lat": 33.5941,
+      "lng": 130.4186,
+      "address": "福岡県福岡市博多区豊2-3-66",
+      "openHours": {
+        "open": "00:00",
+        "close": "23:59"
+      },
+      "budgetRange": "1800円〜",
+      "tags": [
+        "温泉",
+        "24時間",
+        "リラックス",
+        "屋内",
+        "雨OK"
+      ],
+      "indoorOutdoor": "indoor",
+      "sourceUrl": "https://www.manyo.co.jp/hakata/",
+      "travelTime": {
+        "walk": 20,
+        "transit": 7
+      },
+      "reasonTemplates": {
+        "rain": "雨の日は温泉一択。",
+        "night": "24時間営業、いつでも入れる。",
+        "cold": "冷えた体に温泉。",
+        "default": "歩き疲れたら温泉で回復。"
+      },
+      "inviteTemplates": {
+        "short": "サウナだけでも行く？",
+        "medium": "温泉でリフレッシュ？",
+        "default": "博多で天然温泉、贅沢。"
+      }
+    },
+    {
+      "id": "rest-002",
+      "name": "TSUTAYA BOOKSTORE 天神",
+      "category": "rest",
+      "subcategory": "カフェ",
+      "lat": 33.5888,
+      "lng": 130.3993,
+      "address": "福岡県福岡市中央区天神2-10-3",
+      "openHours": {
+        "open": "08:00",
+        "close": "22:00"
+      },
+      "budgetRange": "500〜1000円",
+      "tags": [
+        "カフェ",
+        "本",
+        "静か",
+        "電源",
+        "Wi-Fi",
+        "雨OK"
+      ],
+      "indoorOutdoor": "indoor",
+      "sourceUrl": "https://store.tsite.jp/",
+      "travelTime": {
+        "walk": 5,
+        "transit": 2
+      },
+      "reasonTemplates": {
+        "rain": "雨の日の読書カフェ。",
+        "night": "夜の静かなブックカフェ。",
+        "cold": "温かいコーヒーで一息。",
+        "default": "本に囲まれて休憩。"
+      },
+      "inviteTemplates": {
+        "short": "座って5分だけ休む？",
+        "medium": "本でも眺めながら休憩？",
+        "default": "蔦屋で充電しよう。"
+      }
+    },
+    {
+      "id": "rest-003",
+      "name": "櫛田神社",
+      "category": "rest",
+      "subcategory": "神社",
+      "lat": 33.5894,
+      "lng": 130.4092,
+      "address": "福岡県福岡市博多区上川端町1-41",
+      "openHours": {
+        "open": "04:00",
+        "close": "22:00"
+      },
+      "budgetRange": "無料",
+      "tags": [
+        "神社",
+        "博多",
+        "歴史",
+        "静寂",
+        "パワースポット"
+      ],
+      "indoorOutdoor": "outdoor",
+      "sourceUrl": "https://yokanavi.com/spot/26906/",
+      "travelTime": {
+        "walk": 8,
+        "transit": 3
+      },
+      "reasonTemplates": {
+        "rain": "雨の神社、人が少なくて落ち着く。",
+        "night": "夜の静かな境内で気分転換。",
+        "cold": "凛とした空気で リフレッシュ。",
+        "default": "博多の総鎮守でパワーチャージ。"
+      },
+      "inviteTemplates": {
+        "short": "お参りだけサクッと？",
+        "medium": "山笠も見ていく？",
+        "default": "博多に来たなら一度は参拝。"
+      }
+    },
+    {
+      "id": "rest-004",
+      "name": "アクロス福岡 ステップガーデン",
+      "category": "rest",
+      "subcategory": "屋上庭園",
+      "lat": 33.5901,
+      "lng": 130.4027,
+      "address": "福岡県福岡市中央区天神1-1-1",
+      "openHours": {
+        "open": "09:00",
+        "close": "17:00"
+      },
+      "budgetRange": "無料",
+      "tags": [
+        "庭園",
+        "緑",
+        "展望",
+        "天神",
+        "無料"
+      ],
+      "indoorOutdoor": "outdoor",
+      "sourceUrl": "https://www.acros.or.jp/",
+      "travelTime": {
+        "walk": 5,
+        "transit": 2
+      },
+      "reasonTemplates": {
+        "rain": "雨の日は館内だけでも。",
+        "night": "閉園前の緑の中で深呼吸。",
+        "cold": "日向のステップガーデン。",
+        "default": "ビルの階段を上ると、そこは森。"
+      },
+      "inviteTemplates": {
+        "short": "屋上まで階段で5分。",
+        "medium": "緑の階段、登ってみない？",
+        "default": "天神のど真ん中に山がある。"
+      }
+    },
+    {
+      "id": "rest-005",
+      "name": "マリノアシティ福岡",
+      "category": "rest",
+      "subcategory": "ショッピング",
+      "lat": 33.5804,
+      "lng": 130.3229,
+      "address": "福岡県福岡市西区小戸2-12-30",
+      "openHours": {
+        "open": "10:00",
+        "close": "21:00"
+      },
+      "budgetRange": "無料〜",
+      "tags": [
+        "ショッピング",
+        "アウトレット",
+        "観覧車",
+        "屋内",
+        "雨OK"
+      ],
+      "indoorOutdoor": "indoor",
+      "sourceUrl": "https://www.marinoacity.com/",
+      "travelTime": {
+        "walk": 40,
+        "transit": 15
+      },
+      "reasonTemplates": {
+        "rain": "雨の日の買い物はここ。",
+        "night": "観覧車のライトアップが綺麗。",
+        "cold": "屋内でウィンドウショッピング。",
+        "default": "海沿いのアウトレットでリフレッシュ。"
+      },
+      "inviteTemplates": {
+        "short": "観覧車だけ乗る？",
+        "medium": "ちょっとブラブラしない？",
+        "default": "海風とショッピング。"
+      }
+    },
+    {
+      "id": "rest-006",
+      "name": "舞鶴公園（福岡城跡）",
+      "category": "rest",
+      "subcategory": "公園",
+      "lat": 33.5849,
+      "lng": 130.3835,
+      "address": "福岡県福岡市中央区城内1",
+      "openHours": {
+        "open": "00:00",
+        "close": "23:59"
+      },
+      "budgetRange": "無料",
+      "tags": [
+        "公園",
+        "城跡",
+        "桜",
+        "歴史",
+        "散歩",
+        "無料"
+      ],
+      "indoorOutdoor": "outdoor",
+      "sourceUrl": "https://www.midorimachi.jp/maiduru/",
+      "travelTime": {
+        "walk": 12,
+        "transit": 4
+      },
+      "reasonTemplates": {
+        "rain": "雨の城跡も風情がある。",
+        "night": "夜の石垣、ライトアップ。",
+        "cold": "石垣の上から街を眺めて。",
+        "default": "福岡城の石垣でのんびり。"
+      },
+      "inviteTemplates": {
+        "short": "天守台まで登ってみる？",
+        "medium": "城跡を散歩しない？",
+        "default": "歴史と景色、両方楽しめる。"
+      }
+    },
+    {
+      "id": "limited-001",
+      "name": "福岡城さくらまつり",
+      "category": "limited",
+      "subcategory": "イベント",
+      "lat": 33.5849,
+      "lng": 130.3835,
+      "address": "福岡県福岡市中央区城内 舞鶴公園",
+      "openHours": {
+        "open": "10:00",
+        "close": "22:00"
+      },
+      "budgetRange": "無料（ライトアップエリア有料）",
+      "tags": [
+        "桜",
+        "ライトアップ",
+        "夜",
+        "期間限定",
+        "春"
+      ],
+      "indoorOutdoor": "outdoor",
+      "sourceUrl": "https://saku-hana.jp/",
+      "travelTime": {
+        "walk": 12,
+        "transit": 4
+      },
+      "startDate": "2026-03-20",
+      "endDate": "2026-04-06",
+      "reasonTemplates": {
+        "limited_today": "今日が最終日！見逃したら来年。",
+        "limited_start": "今日からさくらまつり開幕！",
+        "limited_ongoing": "桜のライトアップ、今だけ。",
+        "default": "福岡城跡で夜桜を楽しむ。"
+      },
+      "inviteTemplates": {
+        "short": "ライトアップだけ見る？",
+        "medium": "夜桜散歩しない？",
+        "default": "行くなら今日。"
+      }
+    },
+    {
+      "id": "limited-002",
+      "name": "キャナルシティ博多 噴水ショー",
+      "category": "limited",
+      "subcategory": "ショー",
+      "lat": 33.5897,
+      "lng": 130.4110,
+      "address": "福岡県福岡市博多区住吉1-2",
+      "openHours": {
+        "open": "10:00",
+        "close": "21:00"
+      },
+      "budgetRange": "無料",
+      "tags": [
+        "噴水",
+        "ショー",
+        "屋内",
+        "無料",
+        "雨OK"
+      ],
+      "indoorOutdoor": "indoor",
+      "sourceUrl": "https://canalcity.co.jp/",
+      "travelTime": {
+        "walk": 10,
+        "transit": 4
+      },
+      "endDate": null,
+      "reasonTemplates": {
+        "rain": "雨でも見れる噴水ショー。",
+        "night": "夜の噴水、ライティングが最高。",
+        "default": "毎時開催の噴水ショー。"
+      },
+      "inviteTemplates": {
+        "short": "噴水ショーだけ見る？",
+        "medium": "ショー見てからブラブラする？",
+        "default": "噴水、結構すごいよ。"
+      }
+    },
+    {
+      "id": "limited-003",
+      "name": "福岡アジア美術館 企画展",
+      "category": "limited",
+      "subcategory": "展示",
+      "lat": 33.5905,
+      "lng": 130.4053,
+      "address": "福岡県福岡市博多区下川端町3-1 リバレイン7・8F",
+      "openHours": {
+        "open": "09:30",
+        "close": "18:00"
+      },
+      "budgetRange": "200円",
+      "tags": [
+        "美術館",
+        "アジア",
+        "アート",
+        "屋内",
+        "雨OK"
+      ],
+      "indoorOutdoor": "indoor",
+      "sourceUrl": "https://faam.city.fukuoka.lg.jp/",
+      "travelTime": {
+        "walk": 8,
+        "transit": 3
+      },
+      "startDate": "2026-02-15",
+      "endDate": "2026-03-30",
+      "reasonTemplates": {
+        "limited_today": "今日が最終日！",
+        "limited_start": "新しい企画展が始まった。",
+        "limited_ongoing": "まもなく終了。見るなら今。",
+        "default": "世界で唯一のアジア美術館。"
+      },
+      "inviteTemplates": {
+        "short": "メイン展示だけサクッと？",
+        "medium": "アートに触れてみない？",
+        "default": "200円で入れるアート。"
+      }
+    },
+    {
+      "id": "limited-004",
+      "name": "天神地下街 春フェア",
+      "category": "limited",
+      "subcategory": "イベント",
+      "lat": 33.5900,
+      "lng": 130.3990,
+      "address": "福岡県福岡市中央区天神2丁目 地下",
+      "openHours": {
+        "open": "10:00",
+        "close": "20:00"
+      },
+      "budgetRange": "無料",
+      "tags": [
+        "地下街",
+        "ショッピング",
+        "春",
+        "限定",
+        "雨OK"
+      ],
+      "indoorOutdoor": "indoor",
+      "sourceUrl": "https://www.tenchika.com/",
+      "travelTime": {
+        "walk": 5,
+        "transit": 2
+      },
+      "startDate": "2026-03-01",
+      "endDate": "2026-03-31",
+      "reasonTemplates": {
+        "limited_today": "今日で春フェア終了！",
+        "limited_start": "春フェア、始まったばかり。",
+        "limited_ongoing": "天神地下街の春限定イベント。",
+        "default": "おしゃれな地下街を散策。"
+      },
+      "inviteTemplates": {
+        "short": "地下街、ちょっと覗く？",
+        "medium": "春限定メニュー探してみない？",
+        "default": "雨でも楽しめる天チカ。"
+      }
+    },
+    {
+      "id": "limited-005",
+      "name": "PayPayドーム イベント",
+      "category": "limited",
+      "subcategory": "スポーツ",
+      "lat": 33.5953,
+      "lng": 130.3617,
+      "address": "福岡県福岡市中央区地行浜2-2-2",
+      "openHours": {
+        "open": "10:00",
+        "close": "21:00"
+      },
+      "budgetRange": "2000円〜",
+      "tags": [
+        "野球",
+        "ホークス",
+        "スポーツ",
+        "イベント"
+      ],
+      "indoorOutdoor": "indoor",
+      "sourceUrl": "https://www.softbankhawks.co.jp/",
+      "travelTime": {
+        "walk": 25,
+        "transit": 10
+      },
+      "startDate": "2026-03-01",
+      "endDate": "2026-10-31",
+      "reasonTemplates": {
+        "limited_today": "今日試合あるかも！",
+        "limited_start": "シーズン開幕！",
+        "limited_ongoing": "ホークスの試合、今日ある？",
+        "default": "ドーム周辺だけでも楽しい。"
+      },
+      "inviteTemplates": {
+        "short": "ドームの雰囲気だけ味わう？",
+        "medium": "試合見に行かない？",
+        "default": "野球の季節だ。"
+      }
+    }
+  ]
+}
