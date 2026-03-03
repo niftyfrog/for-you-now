@@ -1,10 +1,11 @@
 /**
- * HIMA PUSH - Main Entry Point
- * SPA Router: Home → Suggestions → Detail
+ * HIMA PUSH → For you now - Main Entry Point
+ * SPA Router: Home → Suggestions → Category → Detail
  */
 import './style.css';
 import { renderHome } from './screens/home.js';
 import { renderSuggestions } from './screens/suggestions.js';
+import { renderCategory } from './screens/category.js';
 import { renderDetail } from './screens/detail.js';
 
 const app = document.getElementById('app');
@@ -24,7 +25,15 @@ function handleSearch(context, settings) {
   lastContext = context;
   lastSettings = settings;
   currentScreen = 'suggestions';
-  renderSuggestions(app, context, settings, handleDetail, handleBackToHome);
+  renderSuggestions(app, context, settings, handleDetail, handleBackToHome, handleCategory);
+}
+
+/**
+ * カテゴリドリルダウン画面へ
+ */
+function handleCategory(category, context, settings) {
+  currentScreen = 'category';
+  renderCategory(app, category, context || lastContext, settings || lastSettings, handleDetail, handleBackToSuggestions);
 }
 
 /**
@@ -49,7 +58,7 @@ function handleBackToHome() {
 function handleBackToSuggestions() {
   if (lastContext && lastSettings) {
     currentScreen = 'suggestions';
-    renderSuggestions(app, lastContext, lastSettings, handleDetail, handleBackToHome);
+    renderSuggestions(app, lastContext, lastSettings, handleDetail, handleBackToHome, handleCategory);
   } else {
     handleBackToHome();
   }

@@ -10,13 +10,21 @@
 export function getGeolocation() {
     return new Promise((resolve) => {
         if (!navigator.geolocation) {
+            console.warn('[Geo] Geolocation APIが利用不可');
             resolve(null);
             return;
         }
         navigator.geolocation.getCurrentPosition(
-            (pos) => resolve({ lat: pos.coords.latitude, lng: pos.coords.longitude }),
-            () => resolve(null),
-            { timeout: 5000, enableHighAccuracy: false }
+            (pos) => {
+                console.log('[Geo] 位置情報取得成功:', pos.coords.latitude, pos.coords.longitude);
+                resolve({ lat: pos.coords.latitude, lng: pos.coords.longitude });
+            },
+            (err) => {
+                console.warn('[Geo] 位置情報取得失敗:', err.code, err.message);
+                // err.code: 1=PERMISSION_DENIED, 2=POSITION_UNAVAILABLE, 3=TIMEOUT
+                resolve(null);
+            },
+            { timeout: 15000, enableHighAccuracy: false, maximumAge: 300000 }
         );
     });
 }

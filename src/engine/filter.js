@@ -1,5 +1,6 @@
 /**
  * Filter - カテゴリ別フィルタリングとカード選出
+ * 非同期対応（Hotpepper API統合）
  */
 import { dataProvider } from '../data/provider.js';
 import { getFallbackSpots } from '../data/fallback.js';
@@ -23,14 +24,14 @@ const CATEGORY_LABEL = {
  * 4枚カードを生成（各カテゴリからスコア上位1件ずつ）
  * @param {Object} context - 文脈情報
  * @param {Object} settings - ユーザー設定
- * @returns {Array} 4枚のカードデータ
+ * @returns {Promise<Array>} 4枚のカードデータ
  */
-export function getTopCards(context, settings) {
+export async function getTopCards(context, settings) {
     const categories = ['scenery', 'food', 'rest', 'limited'];
     const cards = [];
 
     for (const category of categories) {
-        const top = getTopForCategory(category, context, settings, 1);
+        const top = await getTopForCategory(category, context, settings, 1);
         if (top.length > 0) {
             cards.push(formatCard(top[0], category));
         } else {
@@ -52,10 +53,12 @@ export function getTopCards(context, settings) {
  * @param {Object} context
  * @param {Object} settings
  * @param {number} count
- * @returns {Array}
+ * @returns {Promise<Array>}
  */
-export function getTopForCategory(category, context, settings, count = 1) {
-    let candidates = dataProvider.getCandidates(category);
+export async function getTopForCategory(category, context, settings, count = 1) {
+    const location = context.location || null;
+    const maxDistance = settings.maxDistance || 5;
+    let candidates = await dataProvider.getCandidates(category, location, maxDistance);
 
     // スコア計算
     const scored = candidates.map(spot => scoreSpot(spot, context, settings));
@@ -80,10 +83,12 @@ export function getTopForCategory(category, context, settings, count = 1) {
  * @param {string} excludeId - 現在表示中のスポットID
  * @param {Object} context
  * @param {Object} settings
- * @returns {Array} 追加5件のカードデータ
+ * @returns {Promise<Array>} 追加5件のカードデータ
  */
-export function getMoreCards(category, excludeId, context, settings) {
-    let candidates = dataProvider.getCandidates(category);
+export async function getMoreCards(category, excludeId, context, settings) {
+    const location = context.location || null;
+    const maxDistance = settings.maxDistance || 5;
+    let candidates = await dataProvider.getCandidates(category, location, maxDistance);
 
     // 既に表示中のものを除外
     candidates = candidates.filter(s => s.id !== excludeId);
@@ -134,5 +139,6 @@ function formatCard(scoredSpot, category) {
         subcategory: scoredSpot.subcategory,
         tags: scoredSpot.tags,
         travelInfo: scoredSpot.travelInfo,
+        photoUrl: scoredSpot.photoUrl || null,
     };
 }

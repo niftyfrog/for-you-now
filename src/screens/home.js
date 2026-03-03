@@ -1,6 +1,6 @@
 /**
  * Screen A: Home
- * 大ボタン「For you」+ エリア入力 + 設定
+ * ライトテーマ + 位置情報表示 + 天気バッジ + ボトムナビ
  */
 import { gatherContext, getGeolocation } from '../engine/context.js';
 
@@ -22,32 +22,62 @@ const AREA_COORDS = {
   '太宰府': { lat: 33.5220, lng: 130.5353 },
 };
 
+function getWeatherEmoji() {
+  const h = new Date().getHours();
+  if (h >= 6 && h < 18) return '☀️';
+  return '🌙';
+}
+
+function getTimeLabel() {
+  const h = new Date().getHours();
+  if (h < 6) return '深夜';
+  if (h < 11) return '快晴';
+  if (h < 14) return 'ランチ';
+  if (h < 17) return '午後';
+  if (h < 20) return '夕方';
+  return '夜';
+}
+
 export function renderHome(app, onSearch) {
   app.innerHTML = `
     <div class="home-screen" id="home-screen">
-      <div class="home-bg-effects">
-        <div class="orb orb-1"></div>
-        <div class="orb orb-2"></div>
-        <div class="orb orb-3"></div>
+      <div class="home-top-bar">
+        <div class="home-location" id="home-location">
+          <svg class="home-location-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+          </svg>
+          <div class="home-location-text">
+            <span class="home-location-label">現在の場所</span>
+            <span class="home-location-name" id="location-name">取得中...</span>
+          </div>
+        </div>
+        <div class="home-weather-badges">
+          <div class="weather-badge">${getWeatherEmoji()} ${getTimeLabel()}</div>
+          <div class="weather-badge">${getWeatherEmoji() === '🌙' ? '🌙' : '🕐'}</div>
+        </div>
       </div>
 
       <div class="home-content">
         <div class="brand">
-          <h1 class="brand-name">HIMA<span class="brand-accent">PUSH</span></h1>
-          <p class="brand-sub">今この瞬間の、ちょっといいこと</p>
+          <h1 class="brand-name">For you now</h1>
+          <p class="brand-sub">今、この瞬間に最適な体験を</p>
         </div>
 
         <button class="main-button" id="main-button">
           <span class="main-button-inner">
-            <span class="main-button-text">For you</span>
-            <span class="main-button-sub">タップして提案を見る</span>
+            <svg class="main-button-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+              <circle cx="12" cy="10" r="3"/>
+            </svg>
+            <span class="main-button-text">提案をもらう</span>
           </span>
-          <div class="main-button-ripple"></div>
         </button>
 
-        <div class="location-status" id="location-status">
-          <div class="status-dot"></div>
-          <span class="status-text">位置情報を確認中...</span>
+        <div class="home-scroll-hint">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+          <span>提案を見る</span>
         </div>
 
         <div class="area-input-section" id="area-input-section" style="display: none;">
@@ -88,6 +118,8 @@ export function renderHome(app, onSearch) {
           </div>
         </div>
       </div>
+
+      ${renderBottomNav('home')}
     </div>
   `;
 
@@ -97,7 +129,6 @@ export function renderHome(app, onSearch) {
   let maxDistance = 5;
 
   const mainButton = document.getElementById('main-button');
-  const locationStatus = document.getElementById('location-status');
   const areaSection = document.getElementById('area-input-section');
   const settingsToggle = document.getElementById('settings-toggle');
   const settingsPanel = document.getElementById('settings-panel');
@@ -109,13 +140,12 @@ export function renderHome(app, onSearch) {
 
   async function tryGeolocation() {
     geoLocation = await getGeolocation();
+    const locationName = document.getElementById('location-name');
     if (geoLocation) {
-      locationStatus.querySelector('.status-dot').classList.add('active');
-      locationStatus.querySelector('.status-text').textContent = '位置情報を取得しました';
+      locationName.textContent = '現在地を取得しました';
       areaSection.style.display = 'none';
     } else {
-      locationStatus.querySelector('.status-dot').classList.add('inactive');
-      locationStatus.querySelector('.status-text').textContent = '位置情報が取得できません';
+      locationName.textContent = '取得できません';
       areaSection.style.display = 'block';
     }
   }
@@ -123,26 +153,18 @@ export function renderHome(app, onSearch) {
   // メインボタン
   mainButton.addEventListener('click', async () => {
     mainButton.classList.add('loading');
-    mainButton.querySelector('.main-button-text').textContent = '...';
-    mainButton.querySelector('.main-button-sub').textContent = 'ベストを探してます';
+    mainButton.querySelector('.main-button-text').textContent = '検索中...';
 
     let location = geoLocation;
 
-    // エリア入力から座標を取得
     if (!location) {
       const areaInput = document.getElementById('area-input');
       const areaName = areaInput?.value?.trim();
       if (areaName && AREA_COORDS[areaName]) {
         location = AREA_COORDS[areaName];
       } else if (areaName) {
-        // 部分一致を試みる
         const match = Object.keys(AREA_COORDS).find(k => k.includes(areaName) || areaName.includes(k));
-        if (match) {
-          location = AREA_COORDS[match];
-        } else {
-          // デフォルトは天神
-          location = AREA_COORDS['天神'];
-        }
+        location = match ? AREA_COORDS[match] : AREA_COORDS['天神'];
       } else {
         location = AREA_COORDS['天神'];
       }
@@ -150,7 +172,6 @@ export function renderHome(app, onSearch) {
 
     const context = await gatherContext(location);
     const settings = { transport, maxDistance };
-
     onSearch(context, settings);
   });
 
@@ -178,4 +199,41 @@ export function renderHome(app, onSearch) {
     maxDistance = parseInt(e.target.value);
     distanceValue.textContent = `${maxDistance}km`;
   });
+}
+
+/**
+ * ボトムナビゲーション（共通）
+ */
+export function renderBottomNav(active = 'home') {
+  return `
+    <nav class="bottom-nav">
+      <button class="nav-item ${active === 'home' ? 'active' : ''}" data-nav="home">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="${active === 'home' ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2">
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+          <polyline points="9 22 9 12 15 12 15 22"/>
+        </svg>
+        ホーム
+      </button>
+      <button class="nav-item ${active === 'nearby' ? 'active' : ''}" data-nav="nearby">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polygon points="3 11 22 2 13 21 11 13 3 11"/>
+        </svg>
+        周辺
+      </button>
+      <button class="nav-item ${active === 'history' ? 'active' : ''}" data-nav="history">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"/>
+          <polyline points="12 6 12 12 16 14"/>
+        </svg>
+        履歴
+      </button>
+      <button class="nav-item ${active === 'profile' ? 'active' : ''}" data-nav="profile">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+          <circle cx="12" cy="7" r="4"/>
+        </svg>
+        マイページ
+      </button>
+    </nav>
+  `;
 }

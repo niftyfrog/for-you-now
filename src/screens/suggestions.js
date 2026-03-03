@@ -1,191 +1,202 @@
 /**
- * Screen B: Suggestions（提案一覧）
- * 4枚カード表示 + 「もっとこの系統」
+ * Screen B: Suggestions（2x2グリッドカード）
+ * マッチングアプリ風の提案一覧
  */
-import { getTopCards, getMoreCards } from '../engine/filter.js';
+import { getTopCards } from '../engine/filter.js';
+import { renderBottomNav } from './home.js';
 
-const CATEGORY_COLORS = {
-    scenery: { gradient: 'linear-gradient(135deg, #FF6B35, #F7C948)', accent: '#FF6B35' },
-    food: { gradient: 'linear-gradient(135deg, #E84855, #FF6B6B)', accent: '#E84855' },
-    rest: { gradient: 'linear-gradient(135deg, #2EC4B6, #7BDFF2)', accent: '#2EC4B6' },
-    limited: { gradient: 'linear-gradient(135deg, #9B5DE5, #F15BB5)', accent: '#9B5DE5' },
+const CATEGORY_CONFIG = {
+  scenery: {
+    label: '自然',
+    emoji: '🌿',
+    badge: 'badge-scenery',
+    btn: 'btn-scenery',
+    image: '/images/category_nature.png',
+    lines: [
+      { icon: '🌳', text: '都市公園：紅葉の散歩道' },
+      { icon: '🔭', text: '絶景スポット：丘の上の展望台' },
+    ],
+  },
+  food: {
+    label: '食事',
+    emoji: '🍽',
+    badge: 'badge-food',
+    btn: 'btn-food',
+    image: '/images/category_food.png',
+    lines: [
+      { icon: '🍜', text: '地元の味：職人のこだわりラーメン' },
+      { icon: '🍱', text: '隠れた名店：水辺のレストラン' },
+    ],
+  },
+  rest: {
+    label: '休憩',
+    emoji: '☕',
+    badge: 'badge-rest',
+    btn: 'btn-rest',
+    image: '/images/category_rest.png',
+    lines: [
+      { icon: '🏠', text: 'カフェテラス：パノラマビュー' },
+      { icon: '🏯', text: '天然温泉：山のリトリート' },
+    ],
+  },
+  limited: {
+    label: '限定',
+    emoji: '📅',
+    badge: 'badge-limited',
+    btn: 'btn-limited',
+    image: '/images/category_limited.png',
+    lines: [
+      { icon: '🎆', text: '季節のお祭り：桜の夜' },
+      { icon: '🏛', text: 'ポップアップ展示：デジタルアート' },
+    ],
+  },
 };
 
-export function renderSuggestions(app, context, settings, onDetail, onBack) {
-    const cards = getTopCards(context, settings);
-
-    app.innerHTML = `
-    <div class="suggestions-screen" id="suggestions-screen">
-      <div class="suggestions-header">
-        <button class="back-button" id="back-button">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="15 18 9 12 15 6"/>
-          </svg>
-        </button>
-        <div class="suggestions-title">
-          <h2>For you</h2>
-          <p class="suggestions-subtitle">${getTimeGreeting()}</p>
-        </div>
-      </div>
-
-      <div class="cards-container" id="cards-container">
-        ${cards.map((card, i) => renderCard(card, i)).join('')}
-      </div>
-    </div>
-  `;
-
-    // イベントバインド
-    document.getElementById('back-button').addEventListener('click', onBack);
-
-    // カードクリック → 詳細
-    document.querySelectorAll('.card').forEach(cardEl => {
-        cardEl.addEventListener('click', (e) => {
-            // ボタンクリックの場合はバブリングしない
-            if (e.target.closest('.card-action-btn')) return;
-            const id = cardEl.dataset.id;
-            const card = cards.find(c => c.id === id);
-            if (card) onDetail(card);
-        });
-    });
-
-    // 「もっとこの系統」ボタン
-    document.querySelectorAll('.more-btn').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            const category = btn.dataset.category;
-            const excludeId = btn.dataset.exclude;
-            const moreContainer = document.getElementById(`more-${category}`);
-
-            if (moreContainer.children.length > 0) {
-                // 既に展開済み → トグルで閉じる
-                moreContainer.innerHTML = '';
-                btn.textContent = 'もっとこの系統';
-                btn.classList.remove('expanded');
-                return;
-            }
-
-            const moreItems = getMoreCards(category, excludeId, context, settings);
-            moreContainer.innerHTML = moreItems.map((card, i) => renderMiniCard(card, i)).join('');
-            btn.textContent = '閉じる';
-            btn.classList.add('expanded');
-
-            // ミニカードにもクリックイベント
-            moreContainer.querySelectorAll('.mini-card').forEach(miniEl => {
-                miniEl.addEventListener('click', () => {
-                    const id = miniEl.dataset.id;
-                    const card = moreItems.find(c => c.id === id);
-                    if (card) onDetail(card);
-                });
-            });
-        });
-    });
-
-    // 「地図で見る」ボタン
-    document.querySelectorAll('.map-btn').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            const lat = btn.dataset.lat;
-            const lng = btn.dataset.lng;
-            const name = btn.dataset.name;
-            if (lat && lng) {
-                window.open(`https://www.google.com/maps/search/?api=1&query=${lat},${lng}&query_place_id=${encodeURIComponent(name)}`, '_blank');
-            }
-        });
-    });
-
-    // 「共有」ボタン
-    document.querySelectorAll('.share-btn').forEach(btn => {
-        btn.addEventListener('click', async (e) => {
-            e.stopPropagation();
-            const name = btn.dataset.name;
-            const text = btn.dataset.text;
-            if (navigator.share) {
-                try {
-                    await navigator.share({ title: name, text });
-                } catch { }
-            } else {
-                await navigator.clipboard?.writeText(`${name} - ${text}`);
-                showToast('コピーしました！');
-            }
-        });
-    });
-
-    // 入場アニメーション
-    requestAnimationFrame(() => {
-        document.querySelectorAll('.card').forEach((card, i) => {
-            card.style.animationDelay = `${i * 0.12}s`;
-            card.classList.add('card-enter');
-        });
-    });
-}
-
-function renderCard(card, index) {
-    const colors = CATEGORY_COLORS[card.category];
-    return `
-    <div class="card card-${card.category}" data-id="${card.id}" style="--card-accent: ${colors.accent}; --card-gradient: ${colors.gradient}; animation-delay: ${index * 0.12}s">
-      <div class="card-category-badge">${card.emoji} ${card.label}</div>
-      <div class="card-body">
-        <h3 class="card-name">${card.name}</h3>
-        <div class="card-template">
-          <p class="card-line card-line-1">${card.line1}</p>
-          <p class="card-line card-line-2">${card.line2}</p>
-          <p class="card-line card-line-3">${card.line3}</p>
-        </div>
-      </div>
-      <div class="card-actions">
-        <button class="card-action-btn map-btn" data-lat="${card.lat}" data-lng="${card.lng}" data-name="${card.name}">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          地図
-        </button>
-        <button class="card-action-btn share-btn" data-name="${card.name}" data-text="${card.line1} ${card.line2} ${card.line3}">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
-          共有
-        </button>
-        <button class="card-action-btn more-btn" data-category="${card.category}" data-exclude="${card.id}">
-          もっとこの系統
-        </button>
-      </div>
-      <div class="more-container" id="more-${card.category}"></div>
-    </div>
-  `;
-}
-
-function renderMiniCard(card, index) {
-    return `
-    <div class="mini-card" data-id="${card.id}" style="animation-delay: ${index * 0.06}s">
-      <div class="mini-card-body">
-        <span class="mini-card-name">${card.emoji} ${card.name}</span>
-        <div class="mini-card-lines">
-          <span class="mini-line">${card.line1}</span>
-          <span class="mini-line">${card.line2}</span>
-          <span class="mini-line">${card.line3}</span>
-        </div>
-      </div>
-      <svg class="mini-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <polyline points="9 18 15 12 9 6"/>
-      </svg>
-    </div>
-  `;
-}
-
 function getTimeGreeting() {
-    const h = new Date().getHours();
-    if (h < 6) return '深夜のおすすめ 🌙';
-    if (h < 11) return '朝のおすすめ ☀️';
-    if (h < 14) return 'ランチどう？ 🍽️';
-    if (h < 17) return '午後のおすすめ ☕';
-    if (h < 20) return '夕方〜夜のおすすめ 🌅';
-    return '夜のおすすめ 🌃';
+  const h = new Date().getHours();
+  if (h < 6) return '深夜のおすすめ 🌙';
+  if (h < 11) return '朝の散策はいかが？ ☀️';
+  if (h < 14) return 'ランチなんてどう？ 🍜';
+  if (h < 17) return '午後のひとときを ☕';
+  if (h < 20) return '夕方〜夜のおすすめ 🌅';
+  return '夜のくつろぎタイム 🌃';
 }
 
-function showToast(message) {
-    const toast = document.createElement('div');
-    toast.className = 'toast';
-    toast.textContent = message;
-    document.body.appendChild(toast);
-    requestAnimationFrame(() => toast.classList.add('show'));
-    setTimeout(() => {
-        toast.classList.remove('show');
-        setTimeout(() => toast.remove(), 300);
-    }, 2000);
+export async function renderSuggestions(app, context, settings, onDetail, onBack, onCategory) {
+  // ローディング表示
+  app.innerHTML = `
+    <div class="suggestions-screen" id="suggestions-screen">
+      <div class="sug-top-bar">
+        <div class="sug-logo">
+          <div class="sug-logo-icon">📍</div>
+          For you now
+        </div>
+        <div class="sug-icons">
+          <button>🔔</button>
+          <button>👤</button>
+        </div>
+      </div>
+      <div class="sug-header">
+        <div class="sug-special-badge">✨ あなたへの特別提案</div>
+        <h2 class="sug-title">あなたへの提案</h2>
+        <p class="sug-subtitle">${getTimeGreeting()}</p>
+      </div>
+      <div style="display:flex;justify-content:center;align-items:center;min-height:300px;">
+        <div class="loading-spinner"></div>
+      </div>
+      ${renderBottomNav('home')}
+    </div>
+  `;
+
+  const cards = await getTopCards(context, settings);
+
+  app.innerHTML = `
+    <div class="suggestions-screen" id="suggestions-screen">
+      <div class="sug-top-bar">
+        <div class="sug-logo">
+          <div class="sug-logo-icon">📍</div>
+          For you now
+        </div>
+        <div class="sug-icons">
+          <button id="sug-back-btn">←</button>
+        </div>
+      </div>
+
+      <div class="sug-header">
+        <div class="sug-special-badge">✨ あなたへの特別提案</div>
+        <h2 class="sug-title">あなたへの提案</h2>
+        <p class="sug-subtitle">${getTimeGreeting()}</p>
+      </div>
+
+      <div class="cards-grid" id="cards-grid">
+        ${cards.map((card, i) => renderGridCard(card, i)).join('')}
+      </div>
+
+      <div class="sug-footer">
+        <p class="sug-footer-text">ご希望のものが見つかりませんか？ 検索条件を調整してみてください。</p>
+        <div class="sug-footer-actions">
+          <button class="sug-footer-btn" id="back-to-home-btn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/>
+            </svg>
+            条件を変更
+          </button>
+          <button class="sug-footer-btn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+            </svg>
+            履歴を見る
+          </button>
+        </div>
+      </div>
+
+      ${renderBottomNav('home')}
+    </div>
+  `;
+
+  // イベントバインド
+  document.getElementById('sug-back-btn')?.addEventListener('click', onBack);
+  document.getElementById('back-to-home-btn')?.addEventListener('click', onBack);
+
+  // グリッドカードのクリック
+  document.querySelectorAll('.grid-card').forEach(cardEl => {
+    cardEl.addEventListener('click', (e) => {
+      if (e.target.closest('.grid-card-btn')) return;
+      const id = cardEl.dataset.id;
+      const card = cards.find(c => c.id === id);
+      if (card) onDetail(card);
+    });
+  });
+
+  // 「もっと詳しく」ボタン → カテゴリドリルダウン
+  document.querySelectorAll('.grid-card-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const category = btn.dataset.category;
+      if (onCategory) {
+        onCategory(category, context, settings);
+      }
+    });
+  });
+
+  // 入場アニメーション
+  requestAnimationFrame(() => {
+    document.querySelectorAll('.grid-card').forEach((card, i) => {
+      card.style.animationDelay = `${i * 0.1}s`;
+      card.classList.add('card-enter');
+    });
+  });
+}
+
+function renderGridCard(card, index) {
+  const config = CATEGORY_CONFIG[card.category] || CATEGORY_CONFIG.food;
+
+  // Hotpepperデータがあればそれを使う、なければデフォルトの説明
+  const line1Text = card.name !== config.lines[0].text.split('：')[1]
+    ? card.name
+    : config.lines[0].text;
+  const line2Text = card.line2 || config.lines[1].text;
+
+  return `
+    <div class="grid-card" data-id="${card.id}" style="animation-delay: ${index * 0.1}s">
+      <div class="grid-card-image-wrap">
+        <img src="${card.photoUrl || config.image}" alt="${config.label}" 
+             onerror="this.src='${config.image}'" />
+        <div class="grid-card-badge ${config.badge}">${config.emoji} ${config.label}</div>
+      </div>
+      <div class="grid-card-body">
+        <div class="grid-card-line">
+          <span class="grid-card-line-icon">${config.lines[0].icon}</span>
+          <span>${line1Text}</span>
+        </div>
+        <div class="grid-card-line">
+          <span class="grid-card-line-icon">${config.lines[1].icon}</span>
+          <span>${line2Text}</span>
+        </div>
+        <button class="grid-card-btn ${config.btn}" data-category="${card.category}">
+          もっと詳しく ＞
+        </button>
+      </div>
+    </div>
+  `;
 }
